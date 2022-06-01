@@ -1,7 +1,6 @@
 /**
  * 
  */
-let book1 = new book(10,10,100,100);
 let books =[]
 
 function setup() {
@@ -10,7 +9,7 @@ function setup() {
   x_interval = width/num
   y_interval = height/10 * 9
   for(let i=0;i<num;i++){
-    b= new book(x_interval-50,y_interval, x_interval*i,10)
+    b= new book(x_interval-50,y_interval, x_interval*i,10,'https://elib.maruzen.co.jp/app/images/l/2/3000072732.jpg')
     books.push(b)
   }
 }
