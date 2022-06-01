@@ -1,7 +1,12 @@
 class book{
-    constructor(){
+    constructor(w,h,x,y){
+        this.w=w
+        this.h=h
+        this.x=x
+        this.y=y
+
     }
     show(){
-        rect(100,100,200,200);
+        rect(this.x,this.y,this.w,this.h);
     }
 }
