@@ -3,7 +3,16 @@
  */
 let books =[]
 
+//csvのロードを行う，処理はsetupで行う点に注意
+function preload(){
+  sheet_data = loadTable('books_info/no1.csv', 'csv', 'header');
+}
+
 function setup() {
+  names = sheet_data.getColumn('書名');
+  urls = sheet_data.getColumn('URL');
+  console.log(names);
+  console.log(urls);
   createCanvas(1900, 1000);
   num = 5
   x_interval = width/num

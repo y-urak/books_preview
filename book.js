@@ -4,6 +4,7 @@ class book{
         this.h=h
         this.x=x
         this.y=y
+        console.log(typeof(createImg(url)))
         this.img = createImg(url);
     }
     show(){
