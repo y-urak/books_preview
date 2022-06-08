@@ -1,7 +1,7 @@
 //CSVファイルを読み込む関数getCSV()の定義
-function getCSV(){
+function getCSV(csvFilePath){
     var req = new XMLHttpRequest(); // HTTPでファイルを読み込むためのXMLHttpRrequestオブジェクトを生成
-    req.open("get", "books_info/no1.csv", true); // アクセスするファイルを指定
+    req.open("get", csvFilePath, true); // アクセスするファイルを指定
     req.send(null); // HTTPリクエストの発行
 	
     // レスポンスが返ってきたらconvertCSVtoArray()を呼ぶ	
@@ -9,7 +9,7 @@ function getCSV(){
 	    convertCSVtoArray(req.responseText); // 渡されるのは読み込んだCSVデータ
     }
 }
- 
+
 // 読み込んだCSVデータを二次元配列に変換する関数convertCSVtoArray()の定義
 function convertCSVtoArray(str){ // 読み込んだCSVデータが文字列として渡される
     var result = []; // 最終的な二次元配列を入れるための配列
@@ -19,11 +19,14 @@ function convertCSVtoArray(str){ // 読み込んだCSVデータが文字列と�
     for(var i=0;i<tmp.length;++i){
         result[i] = tmp[i].split(',');
     }
-    alert(result[1][8])
-    strArr=result[1][8].split('/');
-    //alert(strArr[7]); 
-    urlToImage(strArr[7]);
-
+    //alert(result[1][result[1].length-1])
+    //複数のデータを指定して情報を取得
+    for(var i=0;i<result.length;i++){
+        strArr=result[i][result[i].length-1].split('/');
+        if(i<4){
+            urlToImage(strArr[7])
+        }
+    }
 }
 
 function urlToImage(str){
@@ -34,25 +37,46 @@ function urlToImage(str){
         baseURL+'3/'+str+'.jpg',
         baseURL+'4/'+str+'.jpg',
         baseURL+'5/'+str+'.jpg',
-        baseURL+'6/'+str+'.jpg'
+        baseURL+'6/'+str+'.jpg',
+        baseURL+'7/'+str+'.jpg',
+        baseURL+'8/'+str+'.jpg',
+        baseURL+'9/'+str+'.jpg'
     ];
     for (var i = 0; i < imgArr.length; i++) {
-        console.log(imgArr[i])
         imagecheck(imgArr[i]);
+        sleep(500)
     }
 }
-
+var imageUrlList=[];
 function imagecheck(url) {
     var newImage = new Image();
     // 画像があった時の処理
     newImage.onload = function() {
-        console.log('あり' + url);
+        //console.log('あり' + url);
+        imageUrlList.push(url);
+        var elem = document.getElementById("result");
+        outputStr="";
+        for(var i=0;i<imageUrlList.length;i++){
+            outputStr+=imageUrlList[i];
+            if(i<imageUrlList.length-1){
+                outputStr+="<br/>"
+            }
+        }
+        elem.innerHTML = "<span style='color: red;'>"+outputStr+"</span>";
     }
     // 画像がなかった時の処理
     newImage.onerror = function() {
-        console.log('なし' + url);
+        //console.log('なし' + url);
     }
     newImage.src = url;
 }
+
+/**
+* Delay for a number of milliseconds
+*/
+function sleep(delay) {
+    var start = new Date().getTime();
+    while (new Date().getTime() < start + delay);
+}
  
-getCSV(); //最初に実行される
+getCSV("books_info/no38.csv"); //最初に実行される
