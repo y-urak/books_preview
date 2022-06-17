@@ -10,9 +10,9 @@ function getCSV(csvFilePath){
     }
 }
 
+var result = []; // 最終的な二次元配列を入れるための配列
 // 読み込んだCSVデータを二次元配列に変換する関数convertCSVtoArray()の定義
 function convertCSVtoArray(str){ // 読み込んだCSVデータが文字列として渡される
-    var result = []; // 最終的な二次元配列を入れるための配列
     var tmp = str.split("\n"); // 改行を区切り文字として行を要素とした配列を生成
  
     // 各行ごとにカンマで区切った文字列を要素とした二次元配列を生成
@@ -44,7 +44,7 @@ function urlToImage(str){
     ];
     for (var i = 0; i < imgArr.length; i++) {
         imagecheck(imgArr[i]);
-        sleep(500)
+        sleep(250);
     }
 }
 var imageUrlList=[];
@@ -78,5 +78,19 @@ function sleep(delay) {
     var start = new Date().getTime();
     while (new Date().getTime() < start + delay);
 }
- 
-getCSV("books_info/no38.csv"); //最初に実行される
+function outputImageUrlListToCsv(){
+    //画像URLをarrに結合
+    for(var i=0; i<imageUrlList.length;i++){
+        result[i].push(imageUrlList[i])
+    }
+    var csvContent = "data:text/csv;charset=utf-8," + result.map(e => e.join(",")).join("\n");
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", file_name.split('/')[1].split('.')[0]+"_changed"+".csv");
+    document.body.appendChild(link); 
+    link.click();
+}
+
+let file_name = "books_info/no38.csv";
+getCSV(file_name); //最初に実行される
