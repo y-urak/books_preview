@@ -23,9 +23,7 @@ function convertCSVtoArray(str){ // 読み込んだCSVデータが文字列と�
     //複数のデータを指定して情報を取得
     for(var i=0;i<result.length;i++){
         strArr=result[i][result[i].length-1].split('/');
-        if(i<4){
-            urlToImage(strArr[7])
-        }
+        urlToImage(strArr[7])
     }
 }
 
@@ -44,7 +42,7 @@ function urlToImage(str){
     ];
     for (var i = 0; i < imgArr.length; i++) {
         imagecheck(imgArr[i]);
-        sleep(250);
+        sleep(100);
     }
 }
 var imageUrlList=[];
@@ -92,5 +90,5 @@ function outputImageUrlListToCsv(){
     link.click();
 }
 
-let file_name = "books_info/no38.csv";
+let file_name = "books_info/no15.csv";
 getCSV(file_name); //最初に実行される

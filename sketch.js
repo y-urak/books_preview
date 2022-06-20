@@ -5,7 +5,7 @@ let categories=[]
 
 //csvのロードを行う，処理はsetupで行う点に注意
 function preload(){
-  sheet_data = loadTable('books_info/no1.csv', 'csv', 'header');
+  sheet_data = loadTable('books_info/no15.csv', 'csv', 'header');
 }
 
 function setup() {
