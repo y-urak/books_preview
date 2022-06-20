@@ -23,13 +23,15 @@ function convertCSVtoArray(str){ // 読み込んだCSVデータが文字列と�
     //複数のデータを指定して情報を取得
     for(var i=0;i<result.length;i++){
         strArr=result[i][result[i].length-1].split('/');
-        urlToImage(strArr[7])
+        console.log(strArr[7]);
+        urlToImage(strArr[7]);
     }
 }
 
 function urlToImage(str){
     var baseURL='https://elib.maruzen.co.jp/app/images/l/'
     var imgArr=[
+        baseURL+'0/'+str+'.jpg',
         baseURL+'1/'+str+'.jpg',
         baseURL+'2/'+str+'.jpg',
         baseURL+'3/'+str+'.jpg',
@@ -40,9 +42,10 @@ function urlToImage(str){
         baseURL+'8/'+str+'.jpg',
         baseURL+'9/'+str+'.jpg'
     ];
+    sleep(200);
     for (var i = 0; i < imgArr.length; i++) {
         imagecheck(imgArr[i]);
-        sleep(100);
+        console.log("slept");
     }
 }
 var imageUrlList=[];
@@ -90,5 +93,5 @@ function outputImageUrlListToCsv(){
     link.click();
 }
 
-let file_name = "books_info/no15.csv";
+let file_name = "books_info/no39.csv";
 getCSV(file_name); //最初に実行される
