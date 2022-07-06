@@ -93,5 +93,5 @@ function outputImageUrlListToCsv(){
     link.click();
 }
 
-let file_name = "books_info/no39.csv";
+let file_name = "books_info/no28.csv";
 getCSV(file_name); //最初に実行される
